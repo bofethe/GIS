@@ -4,7 +4,8 @@ import os
 
 # gdb attachment table path
 gdbpath = input('Enter the path to the geodatabase containing the attachments: ')
-fcPath = gdbpath
+fcname = input('Enter the name of the feature class with the attachments: ')
+fcPath = gdbpath + '\\' + fcname
 inTable = gdbpath + '__ATTACH'
 
 # output folder path
