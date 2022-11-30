@@ -33,7 +33,7 @@ for f in newFields:
 
 for f in webFields:
     if f.name not in newFieldNames and f.required == False:
-        print('\tRemoving field {} from web layer'.format(f.name))
+        print('\tRemoving field [{}: {}] from web layer'.format(f.name, f.type))
         arcpy.management.DeleteField(in_table=webLayerURL,
                                     drop_field=f.name)
 
