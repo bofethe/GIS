@@ -14,7 +14,7 @@ print('Truncating layer...')
 arcpy.management.TruncateTable(webLayerURL)
 
 # Add missing fields from local layer to web layer, if applicable
-print('Checking for new fields to add to web layer')
+print('Checking for new fields to add to web layer...')
 webFields = arcpy.ListFields(webLayerURL)
 newFields = arcpy.ListFields(newLayerPath)
 webFieldNames = []
