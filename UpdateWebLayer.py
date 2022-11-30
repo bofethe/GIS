@@ -17,17 +17,25 @@ arcpy.management.TruncateTable(webLayerURL)
 print('Checking for new fields to add to web layer')
 webFields = arcpy.ListFields(webLayerURL)
 newFields = arcpy.ListFields(newLayerPath)
-
 webFieldNames = []
+newFieldNames = []
+
 for f in webFields:
     webFieldNames.append(f.name)
 
 for f in newFields:
-    if f.name not in webFieldNames and f.type != 'Geometry':
+    newFieldNames.append(f.name)
+    if f.name not in webFieldNames and f.required == False:
         print('\tAdding field [{}: {}] to web layer'.format(f.name, f.type))
         arcpy.management.AddField(in_table=webLayerURL,
                                     field_name=f.name,
                                     field_type=f.type)
+
+for f in webFields:
+    if f.name not in newFieldNames and f.required == False:
+        print('\tRemoving field {} from web layer'.format(f.name))
+        arcpy.management.DeleteField(in_table=webLayerURL,
+                                    drop_field=f.name)
 
 # Append new data to original web layer
 print('Appending new data to web layer...')
