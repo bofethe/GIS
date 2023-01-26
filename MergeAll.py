@@ -30,6 +30,7 @@ for lyr in m.listLayers():
 for table in arcpy.ListTables():
     trackerFieldName = 'LayerName'
 
+    #Make a tracker field if not already there, skip otherwise
     try:
         arcpy.management.AddField(in_table=table,
                                 field_name= trackerFieldName, 
@@ -38,6 +39,7 @@ for table in arcpy.ListTables():
     except:
         pass
 
+    # Add field name to tracker field
     arcpy.management.CalculateField(in_table=table,
                                     field=trackerFieldName,
                                     expression="'{}'.format(table)", 
